@@ -173,6 +173,11 @@ public class jFramePrintJob extends javax.swing.JFrame {
         );
 
         btnDisplay.setText("Display Waiting Jobs");
+        btnDisplay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDisplayActionPerformed(evt);
+            }
+        });
 
         btnProcess.setText("Process Next Job");
 
@@ -386,6 +391,33 @@ public class jFramePrintJob extends javax.swing.JFrame {
         );
     }
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisplayActionPerformed
+        // TODO add your handling code here:
+
+    // Clear the existing table rows
+    tableModel.setRowCount(0);
+
+    // Get all waiting jobs from the queue
+    printJob[] waitingJobs = queue.getWaitingJobs();
+
+    // Display each waiting job
+    for (int i = 0; i < waitingJobs.length; i++) {
+
+        printJob job = waitingJobs[i];
+
+        tableModel.addRow(new Object[]{
+            job.getJobID(),
+            job.getCustomerName(),
+            job.getPrintType(),
+            job.getCopies()
+        });
+    }
+
+    lblStatus.setText(
+        "Displaying " + waitingJobs.length + " waiting job(s)."
+    );
+    }//GEN-LAST:event_btnDisplayActionPerformed
 
     /**
      * @param args the command line arguments
