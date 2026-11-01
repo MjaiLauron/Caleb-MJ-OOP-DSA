@@ -388,9 +388,9 @@ public class jFramePrintJob extends javax.swing.JFrame {
             newJob.getCopies()
         });
 
-        lblStatus.setText("Print job added successfully!");
-
         clearFields();
+        
+        lblStatus.setText("Print job added successfully!");
 
     } else {
         javax.swing.JOptionPane.showMessageDialog(
