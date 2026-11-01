@@ -180,6 +180,11 @@ public class jFramePrintJob extends javax.swing.JFrame {
         });
 
         btnProcess.setText("Process Next Job");
+        btnProcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcessActionPerformed(evt);
+            }
+        });
 
         lblStatus.setText("Ready to accept print jobs.");
 
@@ -418,6 +423,45 @@ public class jFramePrintJob extends javax.swing.JFrame {
         "Displaying " + waitingJobs.length + " waiting job(s)."
     );
     }//GEN-LAST:event_btnDisplayActionPerformed
+
+    private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
+        // TODO add your handling code here:
+        // Check if the queue is empty
+    if (queue.isEmpty()) {
+
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "There are no print jobs to process.",
+            "Empty Queue",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE
+        );
+
+        lblStatus.setText("No waiting print jobs.");
+        return;
+    }
+
+    // Process the first job in the queue
+    printJob processedJob = queue.processNextJob();
+
+    // Remove the processed job from the table
+    tableModel.removeRow(0);
+
+    // Display the processed job information
+    javax.swing.JOptionPane.showMessageDialog(
+        this,
+        "Print job successfully processed!\n\n"
+        + "Job ID: " + processedJob.getJobID() + "\n"
+        + "Customer: " + processedJob.getCustomerName() + "\n"
+        + "Print Type: " + processedJob.getPrintType() + "\n"
+        + "Copies: " + processedJob.getCopies(),
+        "Job Processed",
+        javax.swing.JOptionPane.INFORMATION_MESSAGE
+    );
+
+    lblStatus.setText(
+        "Successfully processed Job ID: " + processedJob.getJobID()
+    );
+    }//GEN-LAST:event_btnProcessActionPerformed
 
     /**
      * @param args the command line arguments
