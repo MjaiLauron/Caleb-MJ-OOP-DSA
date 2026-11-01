@@ -122,4 +122,23 @@ public class printJob {
             }
 
             return waitingJobs;
-        } 
+        }
+
+        // Search for a job using its Job ID
+        public printJob searchJob(String jobID) {
+            if (jobID == null || jobID.trim().isEmpty()) {
+                return null;
+            }
+
+            for (int i = 0; i < count; i++) {
+                int index = (front + i) % jobs.length;
+
+                if (jobs[index].getJobID().equalsIgnoreCase(jobID.trim())) {
+                    return jobs[index];
+                }
+            }
+
+            return null;
+        }
+    }    
+}
