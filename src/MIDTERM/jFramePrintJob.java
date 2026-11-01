@@ -147,6 +147,11 @@ public class jFramePrintJob extends javax.swing.JFrame {
         lblSearch.setText("Search Job ID:");
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -462,6 +467,54 @@ public class jFramePrintJob extends javax.swing.JFrame {
         "Successfully processed Job ID: " + processedJob.getJobID()
     );
     }//GEN-LAST:event_btnProcessActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+          // Get the Job ID entered by the user
+    String searchID = txtSearch.getText().trim();
+
+    // Check if the search field is empty
+    if (searchID.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Please enter a Job ID to search.",
+            "Empty Search",
+            javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    // Search for the job in the queue
+    printJob foundJob = queue.searchJob(searchID);
+
+    // Check if the job was found
+    if (foundJob != null) {
+
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Print job found!\n\n"
+            + "Job ID: " + foundJob.getJobID() + "\n"
+            + "Customer: " + foundJob.getCustomerName() + "\n"
+            + "Print Type: " + foundJob.getPrintType() + "\n"
+            + "Copies: " + foundJob.getCopies(),
+            "Search Result",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE
+        );
+
+        lblStatus.setText("Found Job ID: " + foundJob.getJobID());
+
+    } else {
+
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "No waiting print job found with ID: " + searchID,
+            "Job Not Found",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE
+        );
+
+        lblStatus.setText("Job ID not found.");
+    }
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments
