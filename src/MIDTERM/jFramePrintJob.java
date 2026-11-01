@@ -41,6 +41,18 @@ public class jFramePrintJob extends javax.swing.JFrame {
     lblStatus.setText("Ready to accept print jobs.");
 }
 
+    private void clearFields() {
+
+    txtJobID.setText("");
+    txtCustomer.setText("");
+    txtCopies.setText("");
+    cmbType.setSelectedIndex(0);
+
+    txtJobID.requestFocus();
+
+    lblStatus.setText("Input fields cleared.");
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -283,6 +295,96 @@ public class jFramePrintJob extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        
+    String jobID = txtJobID.getText().trim();
+    String customer = txtCustomer.getText().trim();
+    String type = cmbType.getSelectedItem().toString();
+    String copiesText = txtCopies.getText().trim();
+
+    // Check if fields are empty
+    if (jobID.isEmpty() || customer.isEmpty() || copiesText.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Please fill in all fields.",
+            "Missing Information",
+            javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    // Check if Job ID already exists in the waiting queue
+    if (queue.searchJob(jobID) != null) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Job ID already exists. Please use another ID.",
+            "Duplicate Job ID",
+            javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    int copies;
+
+    // Validate number of copies
+    try {
+        copies = Integer.parseInt(copiesText);
+
+        if (copies <= 0) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Number of copies must be greater than zero.",
+                "Invalid Copies",
+                javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Please enter a valid whole number for copies.",
+            "Invalid Input",
+            javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+        return;
+    }
+
+    // Create the correct print job object
+    printJob newJob;
+
+    if (type.equals("Document")) {
+        newJob = new printJob.DocumentPrintJob(
+            jobID, customer, copies
+        );
+    } else {
+        newJob = new printJob.PhotoPrintJob(
+            jobID, customer, copies
+        );
+    }
+
+    // Add job to queue
+    if (queue.addJob(newJob)) {
+
+        // Display the added job in the table
+        tableModel.addRow(new Object[]{
+            newJob.getJobID(),
+            newJob.getCustomerName(),
+            newJob.getPrintType(),
+            newJob.getCopies()
+        });
+
+        lblStatus.setText("Print job added successfully!");
+
+        clearFields();
+
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "The print queue is full.",
+            "Queue Full",
+            javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+    }
     }//GEN-LAST:event_btnAddActionPerformed
 
     /**
