@@ -36,6 +36,8 @@ public class jFramePrintJob extends javax.swing.JFrame {
 
     tblJobs.setModel(tableModel);
 
+    btnClear.addActionListener(evt -> clearFields());
+
     lblStatus.setText("Ready to accept print jobs.");
 }
 
