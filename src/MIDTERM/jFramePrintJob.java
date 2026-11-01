@@ -44,6 +44,9 @@ public class jFramePrintJob extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblJobs = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
+        lblSearch = new javax.swing.JLabel();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -104,15 +107,32 @@ public class jFramePrintJob extends javax.swing.JFrame {
 
         jPanel6.setToolTipText("Search Print Job");
 
+        lblSearch.setText("Search Job ID:");
+
+        btnSearch.setText("Search");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSearch)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSearch)
+                .addGap(29, 29, 29))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 35, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSearch)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -249,6 +269,7 @@ public class jFramePrintJob extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cmbType;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -260,10 +281,12 @@ public class jFramePrintJob extends javax.swing.JFrame {
     private javax.swing.JLabel lblCopies;
     private javax.swing.JLabel lblCustomer;
     private javax.swing.JLabel lblJobID;
+    private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblType;
     private javax.swing.JTable tblJobs;
     private javax.swing.JTextField txtCopies;
     private javax.swing.JTextField txtCustomer;
     private javax.swing.JTextField txtJobID;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
