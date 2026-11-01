@@ -9,15 +9,35 @@ package MIDTERM;
  * @author winst
  */
 public class jFramePrintJob extends javax.swing.JFrame {
-    
+    private printJob.PrintQueue queue = new printJob.PrintQueue();
+    private javax.swing.table.DefaultTableModel tableModel;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(jFramePrintJob.class.getName());
 
     /**
      * Creates new form jFramePrintJob
      */
     public jFramePrintJob() {
-        initComponents();
-    }
+    initComponents();
+
+    tableModel = new javax.swing.table.DefaultTableModel(
+        new Object[][] {},
+        new String[] {
+            "Job ID",
+            "Customer Name",
+            "Print Type",
+            "Copies"
+        }
+    ) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+
+    tblJobs.setModel(tableModel);
+
+    lblStatus.setText("Ready to accept print jobs.");
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
