@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package MIDTERM;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -460,6 +461,17 @@ public class jFramePrintJob extends javax.swing.JFrame {
         return;
     }
 
+        int confirm = JOptionPane.showConfirmDialog(
+        this,
+            "Are you sure you want to process the next print job?",
+            "Confirm Print Job",
+        JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+    
     // Process the first job in the queue
     printJob processedJob = queue.processNextJob();
 
