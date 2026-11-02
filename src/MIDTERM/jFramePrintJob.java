@@ -62,7 +62,6 @@ public class jFramePrintJob extends javax.swing.JFrame {
 
     lblStatus.setText("Input fields cleared.");
 }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -509,6 +508,9 @@ public class jFramePrintJob extends javax.swing.JFrame {
         // TODO add your handling code here:
           // Get the Job ID entered by the user
     String searchID = txtSearch.getText().trim();
+    
+    // Clear previous table selection
+    tblJobs.clearSelection();
 
     // Check if the search field is empty
     if (searchID.isEmpty()) {
