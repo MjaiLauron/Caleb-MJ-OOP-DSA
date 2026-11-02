@@ -229,10 +229,10 @@ public class jFramePrintJob extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtCustomer, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCopies, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCopies, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblCopies, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(69, 69, 69))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -405,8 +405,9 @@ public class jFramePrintJob extends javax.swing.JFrame {
         });
 
         clearFields();
-        
-        lblStatus.setText("Print job added successfully!");
+
+        lblStatus.setText("Print job added successfully! Total waiting jobs: "
+        + queue.getJobCount());
 
     } else {
         javax.swing.JOptionPane.showMessageDialog(
@@ -441,7 +442,7 @@ public class jFramePrintJob extends javax.swing.JFrame {
     }
 
     lblStatus.setText(
-        "Displaying " + waitingJobs.length + " waiting job(s)."
+    "Total waiting print jobs: " + queue.getJobCount()
     );
     }//GEN-LAST:event_btnDisplayActionPerformed
 
