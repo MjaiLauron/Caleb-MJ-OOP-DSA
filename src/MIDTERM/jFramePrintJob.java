@@ -514,6 +514,18 @@ public class jFramePrintJob extends javax.swing.JFrame {
 
     // Search for the job in the queue
     printJob foundJob = queue.searchJob(searchID);
+    
+    if (foundJob != null) {
+    for (int i = 0; i < tableModel.getRowCount(); i++) {
+        String tableJobID = tableModel.getValueAt(i, 0).toString();
+
+        if (tableJobID.equalsIgnoreCase(searchID)) {
+            tblJobs.setRowSelectionInterval(i, i);
+            tblJobs.scrollRectToVisible(tblJobs.getCellRect(i, 0, true));
+            break;
+        }
+    }
+}
 
     // Check if the job was found
     if (foundJob != null) {
