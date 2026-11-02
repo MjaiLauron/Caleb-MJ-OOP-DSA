@@ -37,18 +37,27 @@ public class jFramePrintJob extends javax.swing.JFrame {
 
     tblJobs.setModel(tableModel);
 
-    btnClear.addActionListener(evt -> clearFields());
+    btnClear.addActionListener(evt -> {
+    int confirm = JOptionPane.showConfirmDialog(
+        this,
+        "Are you sure you want to clear all input fields?",
+        "Confirm Clear",
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        clearFields();
+    }
+    });
 
     lblStatus.setText("Ready to accept print jobs.");
 }
 
     private void clearFields() {
-
     txtJobID.setText("");
     txtCustomer.setText("");
     txtCopies.setText("");
     cmbType.setSelectedIndex(0);
-
     txtJobID.requestFocus();
 
     lblStatus.setText("Input fields cleared.");
